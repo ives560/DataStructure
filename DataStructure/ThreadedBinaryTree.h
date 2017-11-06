@@ -1,10 +1,12 @@
 #pragma once
 
-typedef enum PointerTag{Link,Thread};
+#include "Comm.h"
+
+typedef enum PointerTag{ Link, Thread };
 
 typedef struct BiThrNode
 {
-	char data;
+	ElemType data;
 	BiThrNode *lchild;
 	BiThrNode *rchild;
 	PointerTag LTag;
