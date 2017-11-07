@@ -11,11 +11,26 @@ Queue::~Queue()
 {
 }
 
+// 初始化空循环队列
+Status Queue::InitQueue(SqQueue& Q)
+{
+	Q.front = 0;
+	Q.rear = 0;
+	return OK;
+}
 
-// 进队
+
+// 返回循环队列Q的元素个数
+int Queue::QueueLength(SqQueue Q)
+{
+	return (Q.rear - Q.front + MAX) % MAX;
+}
+
+
+// 循环队列进队
 int Queue::enQueue(SqQueue& qu, int x)
 {
-	if ((qu.rear + 1)%MAX == qu.front)
+	if ((qu.rear + 1)%MAX == qu.front)//队满
 		return 0;
 
 	qu.data[qu.rear] = x;
@@ -25,10 +40,10 @@ int Queue::enQueue(SqQueue& qu, int x)
 }
 
 
-// 出对
+// 循环队列出对
 int Queue::deQueue(SqQueue& qu, int& x)
 {
-	if (qu.front == qu.rear)
+	if (qu.front == qu.rear)//队空
 		return 0;
 
 	x = qu.data[qu.front];
@@ -37,6 +52,7 @@ int Queue::deQueue(SqQueue& qu, int& x)
 	return 1;
 }
 
+/*--------------------链队----------------------------*/
 // 链队入队
 void Queue::enQueue(LiQueue& lqu, int x)
 {
@@ -70,3 +86,4 @@ int Queue::deQueue(LiQueue& lqu, int& x)
 	free(p);
 	return 1;
 }
+
