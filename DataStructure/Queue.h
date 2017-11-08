@@ -31,6 +31,8 @@ public:
 
 	// 初始化空循环队列
 	Status InitQueue(SqQueue& Q);
+	// 队列为空，返回true
+	Status QueueEmpty(SqQueue Q);
 	// 返回循环队列Q的元素个数
 	int QueueLength(SqQueue Q);
 	// 进队
@@ -42,6 +44,7 @@ public:
 	void enQueue(LiQueue& lqu, int x);
 	// 链队出队
 	int deQueue(LiQueue& lqu, int& x);
+
 
 };
 

@@ -19,6 +19,15 @@ Status Queue::InitQueue(SqQueue& Q)
 	return OK;
 }
 
+// 队列为空，返回true
+Status Queue::QueueEmpty(SqQueue Q)
+{
+	if (Q.front == NULL)
+		return TRUE;
+
+	return FALSE;
+}
+
 
 // 返回循环队列Q的元素个数
 int Queue::QueueLength(SqQueue Q)

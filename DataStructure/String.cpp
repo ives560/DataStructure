@@ -92,7 +92,7 @@ int String::SubString(SString& Sub, SString S, int pos, int len)
 {
 	if (S[0] < (pos + len))//Òç³ö
 		return 0;
-
+	                                                      
 	for (int i = 0; i < len; i++)
 	{
 		Sub[i+1] = S[pos + i];
