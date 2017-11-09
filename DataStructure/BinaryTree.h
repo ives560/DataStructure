@@ -35,5 +35,16 @@ public:
 	Status Delete(BiTree* p);
 	// 二叉排序树T中存在关键字等于key的元素时，则删除该数据元素结点
 	Status DeleteBST(BiTree* T, int key);
+	// 对以p为根的二叉排序树作右旋处理
+	void R_Rotate(BiTree* p);
+	// 对以p为根的二叉排序树作左旋处理
+	void L_Rotate(BiTree* p);
+	// 二叉树作左平衡旋转处理
+	void LeftBalance(BiTree* T);
+	// 二叉树作右平衡旋转处理
+	void RightBalance(BiTree* T);
+	// 平衡的二叉排序树T中不存在和e有相同关键字的节点，则插入一个
+	Status InsertAVL(BiTree* T, int e, Status* taller);
+
 };
 

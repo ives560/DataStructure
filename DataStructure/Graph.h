@@ -46,6 +46,8 @@ class Graph
 public:
 	Graph();
 	~Graph();
+	// 建立无相图的邻接矩阵
+	void CreateMGraph(MGraph* G);
 	// 建立图的邻接表结构
 	void CreateALGraph(GraphAdjList* G);
 
@@ -59,5 +61,6 @@ public:
 
 	//邻接表深度遍历
 	void DFSTraverse(GraphAdjList GL);
+
 };
 

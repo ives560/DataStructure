@@ -9,6 +9,35 @@ Graph::~Graph()
 {
 }
 
+// 建立无相图的邻接矩阵
+void Graph::CreateMGraph(MGraph* G)
+{
+	int i, j, k, w;
+	printf("输入顶点数和边数：\n");
+	scanf("%d,%d", &G->numVertexes, &G->numEdges);//输入顶点数和边数
+
+	printf("输入%d个顶点信息：\n", G->numVertexes);
+	for (i = 0; i < G->numVertexes; i++)
+		scanf(&G->vexs[i]);
+
+	//邻接矩阵初始化
+	for (i = 0; i < G->numVertexes; i++)
+	{
+		for (j = 0; j < G->numVertexes; j++)
+			G->arc[i][j] = INFINITY;
+	}
+
+	//读入G->numEdges条边，建立邻接矩阵
+	for (k = 0; k < G->numEdges; k++)
+	{
+		printf("输入边(vi,vj)上的下标i,下标j和权w：\n");
+		scanf("%d,%d,%d", &i, &j, &w);
+		G->arc[i][j] = w;
+		G->arc[j][i] = G->arc[i][j];//无向图，矩阵对称
+	}
+	
+}
+
 
 // 建立图的邻接表结构
 void Graph::CreateALGraph(GraphAdjList* G)
@@ -170,6 +199,7 @@ void MiniSpanTree_Prim(MGraph G)
 		}
 		printf("(%d,%d)", adjvex[k], k);
 		lowcost[k] = 0;
+
 		for (j = 1; j < G.numVertexes; j++)//循环全部节点
 		{
 			if (lowcost[j] != 0 && G.arc[k][j] < lowcost[j])
