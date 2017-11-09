@@ -41,6 +41,10 @@ typedef struct
 typedef int Boolean;
 Boolean visited[MAX];//顶点表访问标志
 
+//
+typedef int Pathmatirx[MAXVEX];//存储最短路径下标的数组
+typedef int ShortPathTable[MAXVEX];//存储到各点最短路径的权值和
+
 class Graph
 {
 public:
@@ -55,12 +59,21 @@ public:
 	void DFS(MGraph G, int i);
 	//邻接矩阵深度遍历
 	void DFSTraverse(MGraph G);
-
+	//邻接矩阵的广度遍历算法
+	void BFSTraverse(MGraph G);
 	//邻接表深度优先递归算法
 	void DFS(GraphAdjList GL, int i);
 
 	//邻接表深度遍历
 	void DFSTraverse(GraphAdjList GL);
 
+	//Prim算法生成连通网最小生成树
+	void MiniSpanTree_Prim(MGraph G);
+	// Kruskal算法生成最小生成树
+	void MiniSpanTree_Kruskal(MGraph G);
+	// 查找连线顶点的尾部下标
+	int Find(int* parent, int f);
+	// 有向网G的v顶点到其余顶点v最短路径P[v]及带权长度D[v]
+	void ShortestPath_Dijkstra(MGraph G, int v0, Pathmatirx* P, ShortPathTable* D);
 };
 

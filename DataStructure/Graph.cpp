@@ -47,6 +47,7 @@ void Graph::CreateALGraph(GraphAdjList* G)
 	printf("输入顶点数和边数：\n");
 	scanf("%d,%d",&G->numVertexes,&G->numEdges);
 
+	printf("输入%d个顶点信息：\n", G->numVertexes);
 	for (i = 0; i < G->numVertexes; i++)//读入顶点信息，建立顶点表
 	{
 		scanf(&G->adjList[i].data);
@@ -130,7 +131,7 @@ void Graph::DFSTraverse(GraphAdjList GL)
 
 #include "Queue.h"
 //邻接矩阵的广度遍历算法
-void BFSTraverse(MGraph G)
+void Graph::BFSTraverse(MGraph G)
 {
 	int i, j;
 	Queue queue;
@@ -166,46 +167,148 @@ void BFSTraverse(MGraph G)
 	}
 }
 
-//Prim算法生成最小生成树
-void MiniSpanTree_Prim(MGraph G)
+//Prim算法生成连通网最小生成树
+void Graph::MiniSpanTree_Prim(MGraph G)
 {
-	int min, i, j, k;
+	int min, i, j;
+	int k;//最小权值顶点下标
 	int adjvex[MAXVEX];//保存顶点下标
 	int lowcost[MAXVEX];//保存顶点间边的权值
 
 	lowcost[0] = 0;
 	adjvex[0] = 0;
 
+	//初始化v0顶点，lowcost，adjvex
 	for (i = 1; i < G.numVertexes; i++)
 	{
-		lowcost[i] = G.arc[0][i];
-		adjvex[i] = 0;
+		lowcost[i] = G.arc[0][i];//将v0顶点与之有边的权值存入数组
+		adjvex[i] = 0;//初始化都为v0的下标
 
 	}
 
+	//
 	for (i = 1; i < G.numVertexes; i++)
 	{
 		min = INFINITY;
-		j = 1; k = 0;
+		j = 1; 
+		k = 0;
 
-		while (j<G.numVertexes)//循环全部顶点
+		//循环全部顶点，查找lowcost中的最小权值
+		while (j<G.numVertexes)
 		{
 			if (lowcost[j] != 0 && lowcost[j] < min)
 			{
 				min = lowcost[j];//当前权值为最小值
-				k = j;			//最小值下标存入k
+				k = j;			//最小权值下标存入k
 			}
 			j++;
 		}
-		printf("(%d,%d)", adjvex[k], k);
-		lowcost[k] = 0;
 
+		printf("(%d,%d)", adjvex[k], k);//打印当前顶点边中权值最小边
+		lowcost[k] = 0;//将当前顶点的权值设置为0，表示此顶点已经完成任务
+
+		//初始化k顶点，lowcost，adjvex
 		for (j = 1; j < G.numVertexes; j++)//循环全部节点
 		{
 			if (lowcost[j] != 0 && G.arc[k][j] < lowcost[j])
 			{
-				lowcost[j] = G.arc[k][j];
-				adjvex[j] = k;
+				lowcost[j] = G.arc[k][j];//将k顶点与之有边的权值存入数组
+				adjvex[j] = k;//初始化为k的下标
+			}
+		}
+	}
+}
+
+#define MAXEDGE	15
+#define MAXVEX	9
+
+//边集数组
+typedef struct
+{
+	int begin;
+	int end;
+	int weight;
+}Edge;
+
+// Kruskal算法生成最小生成树
+void Graph::MiniSpanTree_Kruskal(MGraph G)
+{
+	int i, n, m;
+	Edge edges[MAXEDGE];//边集并按权由小到大排序
+	int parent[MAXVEX];//用来判断边与边是否形成环路
+
+	//此处省略将邻接矩阵G转化为边集数组edges并按权由小到大排序的代码
+
+	//初始化为0
+	for (i = 0; i < G.numVertexes; i++)
+		parent[i] = 0;
+
+	//循环每条边
+	for (i = 0; i < G.numEdges; i++)
+	{
+		n = Find(parent, edges[i].begin);
+		m = Find(parent, edges[i].end);
+
+		if (n != m)//n不等于m，此边没有与现有生成树形成环路
+		{
+			parent[n] = m;//将此边的尾顶点m存入下标为起点n的parent中
+			printf("(%d,%d) %d",edges[i].begin,edges[i].end,edges[i].weight);
+		}
+	}
+}
+
+
+// 查找连线顶点的尾部下标
+int Graph::Find(int* parent, int f)
+{
+	while (parent[f]>0)
+	{
+		f = parent[f];
+	}
+	return f;
+}
+
+#define MAXVEX	9
+
+// 有向网G的v顶点到其余顶点v最短路径P[v]及带权长度D[v]
+void Graph::ShortestPath_Dijkstra(MGraph G, int v0, Pathmatirx* P, ShortPathTable* D)
+{
+	int v, w, k, min;
+	int final[MAXVEX];//final[w]=1表示求得顶点v0至vw的最短路径
+
+	//初始化数据
+	for (v = 0; v < G.numVertexes; v++)
+	{
+		final[v] = 0;
+		(*D)[v] = G.arc[v0][v];
+		(*P)[v] = 0;
+	}
+
+	(*D)[v0] = 0;
+	final[v0] = 1;
+
+	//开始主循环，每次求得v0到某个v顶点的最短路径
+	for (v = 1; v < G.numVertexes; v++)
+	{
+		min = INFINITY;
+		for (w = 0; w < G.numVertexes; w++)
+		{
+			if (!final[w] && (*D)[w] < min)
+			{
+				k = w;
+				min = (*D)[w];
+			}
+		}
+
+		final[k] = 1;
+
+		//修正当前最短路径及距离
+		for (w = 0; w < G.numVertexes; w++)
+		{
+			if (!final[w] && (min + G.arc[k][w] < (*D)[w]))
+			{
+				(*D)[w] = min + G.arc[k][w];
+				(*P)[w] = k;
 			}
 		}
 	}
