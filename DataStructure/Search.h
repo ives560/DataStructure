@@ -1,4 +1,7 @@
 #pragma once
+
+#include"Comm.h"
+
 class Search
 {
 public:
