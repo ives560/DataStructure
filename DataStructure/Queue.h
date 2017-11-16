@@ -44,9 +44,9 @@ public:
 	// 返回循环队列Q的元素个数
 	int QueueLength();
 	// 进队
-	int enQueue(int x);
+	int enQueue(T x);
 	// 出对
-	int deQueue(int& x);
+	int deQueue(T& x);
 
 	// 链队入队
 	void enQueue(LiQueue& lqu, int x);
@@ -96,7 +96,7 @@ int Queue<T>::QueueLength()
 
 // 循环队列进队
 template <typename T>
-int Queue<T>::enQueue(int x)
+int Queue<T>::enQueue(T x)
 {
 	if ((Q.rear + 1) % MAX == Q.front)//队满
 		return 0;
@@ -110,7 +110,7 @@ int Queue<T>::enQueue(int x)
 
 // 循环队列出对
 template <typename T>
-int Queue<T>::deQueue(int& x)
+int Queue<T>::deQueue(T& x)
 {
 	if (Q.front == Q.rear)//队空
 		return 0;
