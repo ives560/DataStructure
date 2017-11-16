@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "List.h"
 
+ZO_USE_NAMESPACE
+
 int op(int a, char Op, int b)
 {
 	if (Op == '+')
@@ -53,21 +55,21 @@ int com(char exp[])
 
 int main()
 {
-	List list;
+	List<int> list;
 
 	list.InitList(list.list);
 	list.insert(list.list, 1, 6);
 	list.insert(list.list, 1, 7);
-	list.insert(list.list, 1, 8);
-	list.insert(list.list, 1, 9);
+	//list.insert(list.list, 1, 8);
+	//list.insert(list.list, 1, 9);
 
-	ElemType e;
-	list.listDelete(list.list, 3, e);
+	//ElemType e;
+	//list.listDelete(list.list, 3, e);
 
-	SLinkList slist;
+	//SLinkList slist;
 
-	list.InitList(slist);
-	list.ListInsert(slist,1, 6);
+	//list.InitList(slist);
+	//list.ListInsert(slist,1, 6);
 
     return 0;
 }

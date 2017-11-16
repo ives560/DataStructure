@@ -45,6 +45,5 @@ public:
 	// Á´¶Ó³ö¶Ó
 	int deQueue(LiQueue& lqu, int& x);
 
-
 };
 

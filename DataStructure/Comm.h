@@ -3,6 +3,12 @@
 #include <stdio.h>
 #include <tchar.h>
 
+#define ZO_NAMESPACE	zolib
+#define ZO_BEGIN_MAMESPACE	namespace ZO_NAMESPACE{
+#define ZO_END_NAMESPACE	}
+#define ZO_USE_NAMESPACE	using namespace ZO_NAMESPACE;
+
+
 #define TRUE 1
 #define FALSE	0
 #define OK	1

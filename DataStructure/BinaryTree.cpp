@@ -79,12 +79,12 @@ void BinaryTree::LevelOrder(BiTree T)
 	if(T != NULL)
 	{
 		rear = (rear + 1) % MAX;
-		que[rear] = T;
+		que[rear] = T;//根结点入队
 
 		while (front!=rear)
 		{
 			front = (front + 1) % MAX;
-			q = que[front];
+			q = que[front];//队头结点出队
 			//visit(q);//访问节点
 			if (q->lchild != NULL)//左子树不空，则左子树入队
 			{

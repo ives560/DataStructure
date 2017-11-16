@@ -2,6 +2,8 @@
 #include "Comm.h"
 #include "List.h"
 
+ZO_BEGIN_MAMESPACE
+
 class Sort
 {
 public:
@@ -35,5 +37,7 @@ public:
 	void QSort(SqList* L, int low, int high);
 	// 交换顺序表L中子表的记录
 	int Partition(SqList* L, int low, int high);
+
 };
 
+ZO_END_NAMESPACE

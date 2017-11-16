@@ -1,5 +1,6 @@
 #include "Sort.h"
 
+ZO_BEGIN_MAMESPACE
 
 Sort::Sort()
 {
@@ -261,3 +262,5 @@ int Sort::Partition(SqList* L, int low, int high)
 	}
 	return low;//返回枢轴所在位置
 }
+
+ZO_END_NAMESPACE

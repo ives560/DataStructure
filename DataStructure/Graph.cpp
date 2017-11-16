@@ -74,7 +74,7 @@ void Graph::CreateALGraph(GraphAdjList* G)
 
 }
 
-//深度优先递归算法
+//邻接矩阵深度优先递归算法
 void Graph::DFS(MGraph G, int i)
 {
 	int j;

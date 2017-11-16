@@ -2,20 +2,22 @@
 
 #include "Comm.h"
 
-typedef enum PointerTag{ Link, Thread };
-
-typedef struct BiThrNode
-{
-	ElemType data;
-	BiThrNode *lchild;
-	BiThrNode *rchild;
-	PointerTag LTag;
-	PointerTag RTag;
-}BiThrNode,*BiThrTree;
-
 //ÏßË÷¶þ²æÊ÷
 class ThreadedBinaryTree
 {
+
+private:
+	typedef enum PointerTag{ Link, Thread };
+
+	typedef struct BiThrNode
+	{
+		ElemType data;
+		BiThrNode *lchild;
+		BiThrNode *rchild;
+		PointerTag LTag;
+		PointerTag RTag;
+	}BiThrNode, *BiThrTree;
+
 public:
 	ThreadedBinaryTree();
 	~ThreadedBinaryTree();
