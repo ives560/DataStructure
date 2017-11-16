@@ -74,9 +74,6 @@
     <ClCompile Include="ThreadedBinaryTree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Queue.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Stack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

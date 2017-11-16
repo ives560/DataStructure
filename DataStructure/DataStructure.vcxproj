@@ -165,7 +165,6 @@
     <ClCompile Include="DataStructure.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="HuffmanTree.cpp" />
-    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="stdafx.cpp" />
