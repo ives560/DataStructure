@@ -57,14 +57,14 @@ int main()
 {
 	List<int> list;
 
-	list.InitList(list.list);
-	list.insert(list.list, 1, 6);
-	list.insert(list.list, 1, 7);
-	//list.insert(list.list, 1, 8);
-	//list.insert(list.list, 1, 9);
+	list.InitList();
+	list.insert( 1, 6);
+	list.insert( 1, 7);
+	//list.insert(1, 8);
+	//list.insert(1, 9);
 
 	//ElemType e;
-	//list.listDelete(list.list, 3, e);
+	//list.listDelete( 3, e);
 
 	//SLinkList slist;
 

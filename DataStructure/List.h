@@ -4,11 +4,13 @@
 
 ZO_BEGIN_MAMESPACE
 //
-typedef struct
+template <typename T>
+struct SqList
 {
-	ElemType data[MAX];
+	T data[MAX];
 	int length;
-}SqList;
+};
+
 
 //链表
 typedef struct LNode
@@ -36,32 +38,34 @@ typedef struct DLNode
 template <typename T>
 class List
 {
+
+private:
+	SqList<T> L;
+
 public:
 	List();
 	~List();
 
-	SqList list;
-
-	int insert(SqList &L, int p, ElemType e);
+	int insert( int p, ElemType e);
 	// 查找顺序表有小到大的插入顺序
-	int LocateElem(SqList L, ElemType e);
-	int listDelete(SqList& L, int p, ElemType& e);
+	int LocateElem(ElemType e);
+	int listDelete(int p, ElemType& e);
 	// 获取元素
-	Status GetElem(SqList L, int i, ElemType* e);
+	Status GetElem(int i, ElemType* e);
 	// 初始化表
-	void InitList(SqList& L);
+	void InitList();
 
 
 	Status GetElem(LinkList L, int i, ElemType& e);
 	// 单链表插入
-	Status ListInsert(LinkList& L, int i, ElemType e);
+	Status ListInsert(LinkList &L, int i, ElemType e);
 	// 单链表删除节点
-	Status ListDelete(LinkList& L, int i, ElemType& e);
+	Status ListDelete(LinkList &L, int i, ElemType& e);
 	// 头部插入创建单链线性表
-	void CreateListHead(LinkList& L, int n);
-	void CreateListTail(LinkList* L, int n);
+	void CreateListHead(LinkList &L, int n);
+	void CreateListTail(LinkList *L, int n);
 	// 清空链表
-	Status ClearList(LinkList& L);
+	Status ClearList(LinkList &L);
 	// 初始化静态链表
 	void InitList(SLinkList space);
 	// 分配节点
@@ -88,14 +92,14 @@ List<T>::~List()
 
 // 初始化表
 template <typename T>
-void List<T>::InitList(SqList& L)
+void List<T>::InitList()
 {
 	L.length = 0;
 }
 
 //在表中第p个位置插入新元素e
 template <typename T>
-int List<T>::insert(SqList &L, int i, ElemType e)
+int List<T>::insert(int i, ElemType e)
 {
 	int k;
 
@@ -121,7 +125,7 @@ int List<T>::insert(SqList &L, int i, ElemType e)
 
 //删除表中第p个位置，并用e返回其值
 template <typename T>
-int List<T>::listDelete(SqList& L, int i, ElemType& e)
+int List<T>::listDelete(int i, ElemType& e)
 {
 	int k;
 
@@ -145,7 +149,7 @@ int List<T>::listDelete(SqList& L, int i, ElemType& e)
 
 //获取元素
 template <typename T>
-Status List<T>::GetElem(SqList L, int i, ElemType* e)
+Status List<T>::GetElem(int i, ElemType* e)
 {
 	if (L.length == 0 || i<1 || i>L.length)
 		return ERROR;
@@ -157,7 +161,7 @@ Status List<T>::GetElem(SqList L, int i, ElemType* e)
 
 // 查找与e相等的元素，如果成功返回该元素的位置
 template <typename T>
-int List<T>::LocateElem(SqList L, ElemType e)
+int List<T>::LocateElem(ElemType e)
 {
 	int i;
 	for (i = 1; i < L.length; i++)

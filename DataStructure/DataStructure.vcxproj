@@ -167,7 +167,6 @@
     <ClCompile Include="HuffmanTree.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Search.cpp" />
-    <ClCompile Include="Sort.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="String.cpp" />
