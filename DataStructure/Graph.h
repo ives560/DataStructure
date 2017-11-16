@@ -2,6 +2,8 @@
 
 #include"Comm.h"
 
+ZO_BEGIN_MAMESPACE
+
 typedef char VertexType;
 typedef int EdgeType;
 
@@ -77,3 +79,4 @@ public:
 	void ShortestPath_Dijkstra(MGraph G, int v0, Pathmatirx* P, ShortPathTable* D);
 };
 
+ZO_END_NAMESPACE

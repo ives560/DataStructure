@@ -1,4 +1,7 @@
 #include "Graph.h"
+#include "Queue.h"
+
+ZO_BEGIN_MAMESPACE
 
 Graph::Graph()
 {
@@ -129,18 +132,15 @@ void Graph::DFSTraverse(GraphAdjList GL)
 	}
 }
 
-#include "Queue.h"
 //邻接矩阵的广度遍历算法
 void Graph::BFSTraverse(MGraph G)
 {
 	int i, j;
-	Queue queue;
-	SqQueue Q;
+	Queue<int> queue;
 
 	for (i = 0; i < G.numVertexes; i++)
 		visited[i] = FALSE;
 
-	queue.InitQueue(Q);
 
 	for (i = 0; i < G.numVertexes; i++)
 	{
@@ -148,18 +148,18 @@ void Graph::BFSTraverse(MGraph G)
 		{
 			visited[i] = TRUE;
 			printf("%c", G.vexs[i]);
-			queue.enQueue(Q, i);
+			queue.enQueue(i);
 			
-			while (!queue.QueueEmpty(Q))
+			while (!queue.QueueEmpty())
 			{
-				queue.deQueue(Q, i);
+				queue.deQueue(i);
 				for (j = 0; j < G.numVertexes; j++)
 				{
 					if (G.arc[i][j] == 1 && !visited[j])
 					{
 						visited[j] = TRUE;
 						printf("%c", G.vexs[j]);
-						queue.enQueue(Q, j);
+						queue.enQueue(j);
 					}
 				}
 			}
@@ -313,3 +313,5 @@ void Graph::ShortestPath_Dijkstra(MGraph G, int v0, Pathmatirx* P, ShortPathTabl
 		}
 	}
 }
+
+ZO_END_NAMESPACE
