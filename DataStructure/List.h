@@ -46,12 +46,12 @@ public:
 	List();
 	~List();
 
-	int insert( int p, ElemType e);
+	int insert( int p, T e);
 	// 查找顺序表有小到大的插入顺序
-	int LocateElem(ElemType e);
-	int listDelete(int p, ElemType& e);
+	int LocateElem(T e);
+	int listDelete(int p, T& e);
 	// 获取元素
-	Status GetElem(int i, ElemType* e);
+	Status GetElem(int i, T* e);
 	// 初始化表
 	void InitList();
 
@@ -99,7 +99,7 @@ void List<T>::InitList()
 
 //在表中第p个位置插入新元素e
 template <typename T>
-int List<T>::insert(int i, ElemType e)
+int List<T>::insert(int i, T e)
 {
 	int k;
 
@@ -125,7 +125,7 @@ int List<T>::insert(int i, ElemType e)
 
 //删除表中第p个位置，并用e返回其值
 template <typename T>
-int List<T>::listDelete(int i, ElemType& e)
+int List<T>::listDelete(int i, T& e)
 {
 	int k;
 
@@ -149,7 +149,7 @@ int List<T>::listDelete(int i, ElemType& e)
 
 //获取元素
 template <typename T>
-Status List<T>::GetElem(int i, ElemType* e)
+Status List<T>::GetElem(int i, T* e)
 {
 	if (L.length == 0 || i<1 || i>L.length)
 		return ERROR;
@@ -161,7 +161,7 @@ Status List<T>::GetElem(int i, ElemType* e)
 
 // 查找与e相等的元素，如果成功返回该元素的位置
 template <typename T>
-int List<T>::LocateElem(ElemType e)
+int List<T>::LocateElem(T e)
 {
 	int i;
 	for (i = 1; i < L.length; i++)
@@ -180,7 +180,7 @@ template <typename T>
 Status List<T>::GetElem(LinkList L, int i, ElemType& e)
 {
 	int j = 1;
-	LNode* p = L->next;//p指向第一个节点，和插入删除节点有区别
+	LNode* p = L.next;//p指向第一个节点，和插入删除节点有区别
 
 	while (p&&j<i)//查找第i个节点
 	{
@@ -260,14 +260,14 @@ void List<T>::CreateListHead(LinkList& L, int n)
 	int i;
 	srand(time(0));
 	L = (LinkList)malloc(sizeof(LNode));
-	L->next = NULL;
+	L.next = NULL;
 
 	for (i = 0; i < n; i++)
 	{
 		p = (LinkList)malloc(sizeof(LNode));
 		p->data = rand() % 100 + 1;
-		p->next = L->next;
-		L->next = p;
+		p->next = L.next;
+		L.next = p;
 	}
 }
 
@@ -297,7 +297,7 @@ template <typename T>
 Status List<T>::ClearList(LinkList& L)
 {
 	LinkList q;
-	LNode* p = L->next;
+	LNode* p = L.next;
 
 	while (p)
 	{
@@ -306,7 +306,7 @@ Status List<T>::ClearList(LinkList& L)
 		p = q;
 	}
 
-	L->next = NULL;//头节点指针域为空
+	L.next = NULL;//头节点指针域为空
 
 	return OK;
 }

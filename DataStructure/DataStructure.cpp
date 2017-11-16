@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "List.h"
+#include "Sort.h"
 
 ZO_USE_NAMESPACE
 
@@ -55,6 +56,7 @@ int com(char exp[])
 
 int main()
 {
+	/*******************¡–±Ì≤‚ ‘**************************/
 	List<int> list;
 
 	list.InitList();
@@ -70,6 +72,21 @@ int main()
 
 	//list.InitList(slist);
 	//list.ListInsert(slist,1, 6);
+
+
+	/***************≈≈–Ú≤‚ ‘*******************/
+	SqList<int> sqlist;
+	sqlist.length = 5;
+	sqlist.data[0] = 1;
+	sqlist.data[1] = 8;
+	sqlist.data[2] = 2;
+	sqlist.data[3] = 4;
+	sqlist.data[4] = 9;
+	sqlist.data[5] = 5;
+
+	Sort<int> sort(&sqlist);
+
+	sort.BubbleSort0();
 
     return 0;
 }

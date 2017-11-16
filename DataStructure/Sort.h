@@ -10,10 +10,10 @@ class Sort
 {
 
 private:
-	SqList<T> L;
+	SqList<T> *L;
 
 public:
-	Sort();
+	Sort(SqList<T> *list);
 	~Sort();
 	// 交换L中数组r的下标为i和j的值
 	void swap(int i, int j);
@@ -47,8 +47,9 @@ public:
 };
 
 template <typename T>
-Sort<T>::Sort()
+Sort<T>::Sort(SqList<T> *list)
 {
+	L = list;
 }
 
 template <typename T>
@@ -78,7 +79,7 @@ void Sort<T>::BubbleSort0()
 		{
 			if (L->data[i]>L->data[j])
 			{
-				swap(L, i, j);//交换L->data[i]与L->data[j]的值
+				swap( i, j);//交换L->data[i]与L->data[j]的值
 			}
 		}
 	}
