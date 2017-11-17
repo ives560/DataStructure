@@ -70,6 +70,7 @@ void Sort<T>::swap(int i, int j)
 }
 
 // 对顺序表L作冒泡排序
+//做好情况时间复杂度为O(n)
 // 对顺序表L作改进冒泡算法时间复杂度为O(n*n)
 template <typename T>
 void Sort<T>::BubbleSort()
@@ -92,26 +93,32 @@ void Sort<T>::BubbleSort()
 
 
 // 对顺序表L作简单选择排序
+//最好最差情况一样
+//时间复杂度为O(n*n)
+//性能略优于冒泡排序
 template <typename T>
 void Sort<T>::SelectSort()
 {
 	int i, j, min;
 	for (i = 1; i < L->length; i++)
 	{
-		min = i;
-		for (j = i + 1; j <= L->length; j++)
+		min = i;//将当前下标定义为最小值下标
+		for (j = i + 1; j <= L->length; j++)//循环之后的数据
 		{
-			if (L->data[min]>L->data[j])
-				min = j;
+			if (L->data[min]>L->data[j])//如果有小于当前最小值的关键字
+				min = j;//将此关键字的下标赋值给min
 		}
 
-		if (i != min)
-			swap(L, i, min);
+		if (i != min)//若min不等于i，说明找到最小值，交换
+			swap(i, min);
 	}
 }
 
 
 // 对顺序表L作直接插入排序
+//最好情况时间复杂度为O(n)
+//时间复杂度为O(n*n)
+//性能比冒泡和简单选择排序好一些
 template <typename T>
 void Sort<T>::InsertSort()
 {
@@ -207,7 +214,7 @@ void Sort<T>::HeapSort()
 
 	for (i = L->length; i > 1; i--)
 	{
-		swap(L, 1, i);
+		swap(1, i);
 		HeapAdjust(L, 1, i - 1);
 	}
 }

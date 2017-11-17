@@ -79,14 +79,15 @@ void ListText()
 void BubbleSortText()
 {
 	SqList<int> sqlist;
-	sqlist.length = 6;
+	sqlist.length = 7;
 
-	sqlist.data[1] = 8;
-	sqlist.data[2] = 2;
-	sqlist.data[3] = 4;
-	sqlist.data[4] = 9;
-	sqlist.data[5] = 5;
-	sqlist.data[6] = 3;
+	sqlist.data[1] = 38;
+	sqlist.data[2] = 65;
+	sqlist.data[3] = 97;
+	sqlist.data[4] = 76;
+	sqlist.data[5] = 13;
+	sqlist.data[6] = 27;
+	sqlist.data[7] = 10;
 
 	Sort<int> sort(&sqlist);
 
@@ -141,7 +142,7 @@ void QuickSortText()
 int main()
 {
 
-	QuickSortText();
+	BubbleSortText();
 
     return 0;
 }
