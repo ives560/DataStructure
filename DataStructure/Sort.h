@@ -17,10 +17,7 @@ public:
 	~Sort();
 	// 交换L中数组r的下标为i和j的值
 	void swap(int i, int j);
-	// 对顺序表L作交换排序（冒泡排序初级版）
-	void BubbleSort0();
-	// 对顺序表L作冒泡排序
-	void BubbleSort1();
+
 	// 对顺序表L作改进冒泡算法
 	void BubbleSort();
 	// 对顺序表L作简单选择排序
@@ -40,9 +37,8 @@ public:
 	// 对顺序表L作快速排序	
 	void QuickSort();
 	// 对顺序表L中的子序列L->data作快速排序
-	void QSort(int low, int high);
 	// 快速排序尾递归优化和小数组优化
-	void QSort1(int low, int high);
+	void QSort(int low, int high);
 	// 交换顺序表L中子表的记录
 	int Partition(int low, int high);
 
@@ -67,43 +63,6 @@ void Sort<T>::swap(int i, int j)
 	int temp = L->data[i];
 	L->data[i] = L->data[j];
 	L->data[j] = temp;
-}
-
-
-// 对顺序表L作交换排序（冒泡排序初级版）
-template <typename T>
-void Sort<T>::BubbleSort0()
-{
-	int i, j;
-	for (i = 1; i < L->length; i++)
-	{
-		for (j = i + 1; j <= L->length; j++)
-		{
-			if (L->data[i]>L->data[j])
-			{
-				swap(i, j);//交换L->data[i]与L->data[j]的值
-			}
-		}
-	}
-}
-
-
-// 对顺序表L作冒泡排序
-template <typename T>
-void Sort<T>::BubbleSort1()
-{
-	int i, j;
-	for (i = 1; i < L->length; i++)
-	{
-		//一趟排序
-		for (j = L->length - 1; j >= i; j--)//j从后往前循环
-		{
-			if (L->data[j] > L->data[j + 1])//若前者大于后者
-			{
-				swap(j, j + 1);//交换L->data[j]与L->data[j+1]的值
-			}
-		}
-	}
 }
 
 // 对顺序表L作冒泡排序
@@ -295,23 +254,10 @@ void Sort<T>::QuickSort()
 
 #define MAX_LENGTH_INSERT_SORT	7
 
-// 对顺序表L中的子序列L->data作快速排序
-template <typename T>
-void Sort<T>::QSort(int low, int high)
-{
-	int pivot;
-	if (low < high)
-	{
-		pivot = Partition(low, high);//将L->data一分为二,算出“枢轴”值pivot
-
-		QSort(low, pivot - 1);//对pivot左侧表递归排序
-		QSort(pivot + 1, high);//对pivot右侧表递归排序
-	}
-}
 
 // 快速排序尾递归优化和小数组优化
 template <typename T>
-void Sort<T>::QSort1(int low, int high)
+void Sort<T>::QSort(int low, int high)
 {
 	int pivot;
 	if ((high - low)>MAX_LENGTH_INSERT_SORT)//当high-low大于常数时用快速排序
@@ -320,7 +266,7 @@ void Sort<T>::QSort1(int low, int high)
 		{
 			pivot = Partition(low, high);//将L->data一分为二,算出“枢轴”值pivot
 
-			QSort1(low, pivot - 1);//对低子表递归排序
+			QSort(low, pivot - 1);//对低子表递归排序
 			low = pivot + 1;//尾递归，效果等同QSort(pivot + 1, high);缩减堆栈深度
 		}
 
