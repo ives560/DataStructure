@@ -160,6 +160,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreadedBinaryTree.h" />
     <ClInclude Include="ZoByteArray.h" />
+    <ClInclude Include="ZoKMP.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinaryTree.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="ThreadedBinaryTree.cpp" />
+    <ClCompile Include="ZoKMP.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
