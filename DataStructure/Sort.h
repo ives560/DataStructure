@@ -24,13 +24,17 @@ public:
 	void SelectSort();
 	// 对顺序表L作直接插入排序
 	void InsertSort();
+	// 对顺序表L作直接插入排序
+	void InsertSort(int low,int high);
 	// 对顺序表L作希尔排序
 	void ShellSort();
+	//
 	void HeapAdjust(int s, int m);
 	// 对顺序表L进行堆排序
 	void HeapSort();
 	// 对顺序表L作归并排序
 	void MergeSort();
+	//
 	void MSort(int SR[], int TR1[], int s, int t);
 	// 对顺序表L作快速排序	
 	void Merge(int SR[], int TR[], int i, int m, int n);
@@ -126,6 +130,27 @@ void Sort<T>::InsertSort()
 		}
 	}
 }
+
+// 对顺序表L作直接插入排序
+template <typename T>
+void Sort<T>::InsertSort(int low,int high)
+{
+	int i, j;
+	for (i = low+1; i <= high; i++)//假设L->data[i-1]已经放好位置
+	{
+		if (L->data[i - 1] > L->data[i])//前面的数比后面的数L->data[i]大
+		{
+			L->data[0] = L->data[i];//设置哨兵,暂存后面较小的数L->data[i]
+
+			//将大数循环后移
+			for (j = i - 1; L->data[j]>L->data[0]; j--)//前面的数大于L->data[0]
+				L->data[j + 1] = L->data[j];//前面的记录后移
+
+			L->data[j + 1] = L->data[0];//插入暂存较小的数
+		}
+	}
+}
+
 
 
 // 对顺序表L作希尔排序
@@ -273,7 +298,7 @@ void Sort<T>::QSort(int low, int high)
 	}
 	else//当high-low小于等于常数时用直接插入排序
 	{
-		InsertSort();
+		InsertSort(low,high);
 	}
 }
 

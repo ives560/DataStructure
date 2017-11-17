@@ -114,7 +114,7 @@ void InsertSortText()
 void QuickSortText()
 {
 	SqList<int> sqlist;
-	sqlist.length = 8;
+	sqlist.length = 15;
 
 	sqlist.data[1] = 50;
 	sqlist.data[2] = 10;
@@ -124,7 +124,13 @@ void QuickSortText()
 	sqlist.data[6] = 40;
 	sqlist.data[7] = 80;
 	sqlist.data[8] = 60;
-	//sqlist.data[9] = 20;
+	sqlist.data[9] = 20;
+	sqlist.data[10] = 36;
+	sqlist.data[11] = 82;
+	sqlist.data[12] = 27;
+	sqlist.data[13] = 41;
+	sqlist.data[14] = 53;
+	sqlist.data[15] = 68;
 
 	Sort<int> sort(&sqlist);
 
@@ -135,7 +141,7 @@ void QuickSortText()
 int main()
 {
 
-	InsertSortText();
+	QuickSortText();
 
     return 0;
 }
