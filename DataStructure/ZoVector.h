@@ -1,4 +1,9 @@
 #pragma once
+
+#include "Comm.h"
+
+ZO_BEGIN_MAMESPACE
+
 class ZoVector
 {
 public:
@@ -6,3 +11,4 @@ public:
 	~ZoVector();
 };
 
+ZO_END_NAMESPACE
