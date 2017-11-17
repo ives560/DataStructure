@@ -7,8 +7,8 @@ ZO_BEGIN_MAMESPACE
 template <typename T>
 struct SqList
 {
-	T data[MAX];
-	int length;
+	T data[MAX];//data[0]不用
+	int length;//长度从1开始算
 };
 
 

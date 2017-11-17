@@ -54,14 +54,15 @@ int com(char exp[])
 	return stack[top];
 }
 
-int main()
+/*******************¡–±Ì≤‚ ‘**************************/
+void ListText()
 {
-	/*******************¡–±Ì≤‚ ‘**************************/
+
 	List<int> list;
 
 	list.InitList();
-	list.insert( 1, 6);
-	list.insert( 1, 7);
+	list.insert(1, 6);
+	list.insert(1, 7);
 	//list.insert(1, 8);
 	//list.insert(1, 9);
 
@@ -72,21 +73,69 @@ int main()
 
 	//list.InitList(slist);
 	//list.ListInsert(slist,1, 6);
+}
 
-
-	/***************≈≈–Ú≤‚ ‘*******************/
+//√∞≈›≈≈–Ú≤‚ ‘
+void BubbleSortText()
+{
 	SqList<int> sqlist;
-	sqlist.length = 5;
-	sqlist.data[0] = 1;
+	sqlist.length = 6;
+
 	sqlist.data[1] = 8;
 	sqlist.data[2] = 2;
 	sqlist.data[3] = 4;
 	sqlist.data[4] = 9;
 	sqlist.data[5] = 5;
+	sqlist.data[6] = 3;
 
 	Sort<int> sort(&sqlist);
 
-	sort.BubbleSort0();
+	sort.BubbleSort();
+}
+
+//≤Â»Î≈≈–Ú≤‚ ‘
+void InsertSortText()
+{
+	SqList<int> sqlist;
+	sqlist.length = 5;
+
+	sqlist.data[1] = 1;
+	sqlist.data[2] = 9;
+	sqlist.data[3] = 4;
+	sqlist.data[4] = 6;
+	sqlist.data[5] = 2;
+
+	Sort<int> sort(&sqlist);
+
+	sort.InsertSort();
+}
+
+//øÏÀŸ≈≈–Ú≤‚ ‘
+void QuickSortText()
+{
+	SqList<int> sqlist;
+	sqlist.length = 8;
+
+	sqlist.data[1] = 50;
+	sqlist.data[2] = 10;
+	sqlist.data[3] = 90;
+	sqlist.data[4] = 30;
+	sqlist.data[5] = 70;
+	sqlist.data[6] = 40;
+	sqlist.data[7] = 80;
+	sqlist.data[8] = 60;
+	//sqlist.data[9] = 20;
+
+	Sort<int> sort(&sqlist);
+
+	sort.QuickSort();
+
+}
+
+int main()
+{
+
+	InsertSortText();
 
     return 0;
 }
