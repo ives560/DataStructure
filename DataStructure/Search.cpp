@@ -11,6 +11,20 @@ Search::~Search()
 }
 
 
+// À≥–Ú≤È’“
+int Search::Sequential_Search(int* a, int n, int key)
+{
+	int i;
+	a[0] = key;
+	i = n;
+	while (a[i]!=key)
+	{
+		i--;
+	}
+	return i;
+}
+
+
 // ’€∞Î≤È’“
 int Search::Binary_Search(int* a, int n, int key)
 {
