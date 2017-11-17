@@ -109,7 +109,7 @@ void BinaryTree::LevelOrder(BiTree T)
 //key：要查找的值
 //f：T的双亲，初始化为NULL
 //p：查找到的节点地址
-Status BinaryTree::SearchBST(BiTree T, int key, BiTree f, BiTree* p)
+Status BinaryTree::SearchBST(BiTree T, ElemType key, BiTree f, BiTree* p)
 {
 	if (!T)
 	{
@@ -134,7 +134,7 @@ Status BinaryTree::SearchBST(BiTree T, int key, BiTree f, BiTree* p)
 
 
 // 当二叉排序树T中不存在关键字等于key的数据元素时插入key
-Status BinaryTree::InsertBST(BiTree* T, int key)
+Status BinaryTree::InsertBST(BiTree* T, ElemType key)
 {
 	BiTree p, s;
 	if (!SearchBST(*T, key, NULL, &p))
@@ -191,7 +191,7 @@ Status BinaryTree::Delete(BiTree* p)
 
 
 // 二叉排序树T中存在关键字等于key的元素时，则删除该数据元素结点
-Status BinaryTree::DeleteBST(BiTree* T, int key)
+Status BinaryTree::DeleteBST(BiTree* T, ElemType key)
 {
 	if (!*T)
 		return FALSE;
@@ -275,29 +275,29 @@ void BinaryTree::RightBalance(BiTree* T)
 }
 
 
-// 平衡的二叉排序树T中不存在和e有相同关键字的节点，则插入一个
-Status BinaryTree::InsertAVL(BiTree* T, int e, Status* taller)
+// 平衡的二叉排序树T中不存在和ElemType有相同关键字的节点，则插入一个
+Status BinaryTree::InsertAVL(BiTree* T, ElemType key, Status* taller)
 {
 	if (!*T)//插入新结点，树长高，置taller为true
 	{
 		*T = (BiTree)malloc(sizeof(BiTNode));
-		(*T)->data = e;
+		(*T)->data = key;
 		(*T)->lchild = (*T)->rchild = NULL;
 		(*T)->bf = EH;
 		*taller = TRUE;
 	}
 	else
 	{
-		if (e == (*T)->data)//树中已存在和e有相同关键字的节点则不再插入
+		if (key == (*T)->data)//树中已存在和e有相同关键字的节点则不再插入
 		{
 			*taller = FALSE;
 			return FALSE;
 		}
 
-		if (e < (*T)->data)//继续在T的左子树中进行搜索
+		if (key < (*T)->data)//继续在T的左子树中进行搜索
 		{
 
-			if (!InsertAVL(&(*T)->lchild, e, taller))//递归查找插入位置
+			if (!InsertAVL(&(*T)->lchild, key, taller))//递归查找插入位置
 				return FALSE;
 
 			//插入完成进行平衡处理
@@ -323,7 +323,7 @@ Status BinaryTree::InsertAVL(BiTree* T, int e, Status* taller)
 		else//继续在T的右子树中进行搜索
 		{
 
-			if (!InsertAVL(&(*T)->rchild, e, taller))//递归查找插入位置
+			if (!InsertAVL(&(*T)->rchild, key, taller))//递归查找插入位置
 				return FALSE;
 
 			//插入完成进行平衡处理

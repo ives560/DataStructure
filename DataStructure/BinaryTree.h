@@ -4,7 +4,7 @@
 //二叉链表结点结构
 typedef struct BiTNode
 {
-	char data;	//结点数据
+	ElemType data;	//结点数据
 	int bf;		//结点的平衡因子
 	BiTNode *lchild;
 	BiTNode *rchild;
@@ -28,13 +28,13 @@ public:
 	void LevelOrder(BiTree T);
 
 	// 递归查找二叉排序树T是否存在key
-	Status SearchBST(BiTree T, int key, BiTree f, BiTree* p);
+	Status SearchBST(BiTree T, ElemType key, BiTree f, BiTree* p);
 	// 当二叉排序树T中不存在关键字等于key的数据元素时插入key
-	Status InsertBST(BiTree* T, int key);
+	Status InsertBST(BiTree* T, ElemType key);
 	// 从二叉树中删除节点p，并重接它的左或右子树
 	Status Delete(BiTree* p);
 	// 二叉排序树T中存在关键字等于key的元素时，则删除该数据元素结点
-	Status DeleteBST(BiTree* T, int key);
+	Status DeleteBST(BiTree* T, ElemType key);
 	// 对以p为根的二叉排序树作右旋处理
 	void R_Rotate(BiTree* p);
 	// 对以p为根的二叉排序树作左旋处理
@@ -43,8 +43,8 @@ public:
 	void LeftBalance(BiTree* T);
 	// 二叉树作右平衡旋转处理
 	void RightBalance(BiTree* T);
-	// 平衡的二叉排序树T中不存在和e有相同关键字的节点，则插入一个
-	Status InsertAVL(BiTree* T, int e, Status* taller);
+	// 平衡的二叉排序树T中不存在和ElemType有相同关键字的节点，则插入一个
+	Status InsertAVL(BiTree* T, ElemType key, Status* taller);
 
 };
 
