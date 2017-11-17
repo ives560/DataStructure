@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="ZoBTree.h" />
     <ClInclude Include="Comm.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="HuffmanTree.h" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinaryTree.cpp" />
+    <ClCompile Include="ZoBTree.cpp" />
     <ClCompile Include="DataStructure.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="HuffmanTree.cpp" />

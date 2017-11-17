@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <string.h>
+#include <assert.h> 
 
 #define ZO_NAMESPACE	zolib
 #define ZO_BEGIN_MAMESPACE	namespace ZO_NAMESPACE{
