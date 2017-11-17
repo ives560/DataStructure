@@ -60,6 +60,9 @@
     <ClInclude Include="ZoByteArray.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ZoVector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -72,9 +75,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ThreadedBinaryTree.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Stack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="String.cpp">

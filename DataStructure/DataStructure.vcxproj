@@ -159,6 +159,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreadedBinaryTree.h" />
     <ClInclude Include="ZoByteArray.h" />
+    <ClInclude Include="ZoVector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinaryTree.cpp" />
@@ -166,7 +167,6 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="HuffmanTree.cpp" />
     <ClCompile Include="Search.cpp" />
-    <ClCompile Include="Stack.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="ThreadedBinaryTree.cpp" />
