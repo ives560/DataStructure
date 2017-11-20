@@ -186,13 +186,34 @@ void HeapSortText()
 	sort.HeapSort();
 }
 
+//≤¢πÈ≈≈–Ú≤‚ ‘
+void MergeSortText()
+{
+	SqList<int> sqlist;
+	sqlist.length = 9;
+
+	sqlist.data[1] = 50;
+	sqlist.data[2] = 10;
+	sqlist.data[3] = 90;
+	sqlist.data[4] = 30;
+	sqlist.data[5] = 70;
+	sqlist.data[6] = 40;
+	sqlist.data[7] = 80;
+	sqlist.data[8] = 60;
+	sqlist.data[9] = 20;
+
+	Sort<int> sort(&sqlist);
+
+	sort.MergeSort2();
+}
+
 
 
 int main()
 {
 
 	//InsertSortText();
-	HeapSortText();
+	MergeSortText();
     return 0;
 }
 

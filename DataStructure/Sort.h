@@ -29,11 +29,17 @@ public:
 	void InsertSort();
 	// 对顺序表L作希尔排序
 	void ShellSort();
+	//
 	void HeapAdjust(int s, int m);
 	// 对顺序表L进行堆排序
 	void HeapSort();
 	// 对顺序表L作归并排序
 	void MergeSort();
+	//对顺序表L作归并非递归排序
+	void MergeSort2();
+	//将SR[]中相邻长度为s的子序列两两归并到TR[]
+	void MergePass(int SR[], int TR[], int s, int n);
+	//
 	void MSort(int SR[], int TR1[], int s, int t);
 	// 对顺序表L作快速排序	
 	void Merge(int SR[], int TR[], int i, int m, int n);
@@ -244,7 +250,7 @@ void Sort<T>::MergeSort()
 }
 
 
-// 将SR归并排序为TR1
+// 将SR[s..t]归并排序为TR1[s..t]
 template <typename T>
 void Sort<T>::MSort(int SR[], int TR1[], int s, int t)
 {
@@ -262,7 +268,7 @@ void Sort<T>::MSort(int SR[], int TR1[], int s, int t)
 }
 
 
-// 将有序的SR和SR归并为有序的TR
+// 将有序的SR[i..m]和SR[m+1..n]归并为有序的TR[i..n]
 template <typename T>
 void Sort<T>::Merge(int SR[], int TR[], int i, int m, int n)
 {
@@ -285,6 +291,50 @@ void Sort<T>::Merge(int SR[], int TR[], int i, int m, int n)
 	{
 		for (l = 0; l <= n - j; l++)
 			TR[k + l] = SR[j + l];
+	}
+}
+
+//对顺序表L作归并非递归排序
+template <typename T>
+void Sort<T>::MergeSort2()
+{
+	int* TR = (int*)malloc(L->length*sizeof(int));//申请额外空间
+	int k = 1;
+
+	while (k<L->length)
+	{
+		MergePass(L->data,TR,k,L->length);
+		k = 2 * k;//子序列长度加倍
+
+		MergePass(TR,L->data, k, L->length);
+		k = 2 * k;//子序列长度加倍
+	}
+}
+
+//将SR[]中相邻长度为s的子序列两两归并到TR[]
+template <typename T>
+void Sort<T>::MergePass(int SR[], int TR[], int s, int n)
+{
+	int i = 1;
+	int j;
+
+	while (i<=n-2*s+1)
+	{
+		Merge(SR, TR, i, i + s - 1, i + 2 * s - 1);//两两归并
+		i = i + 2 * s;
+	}
+
+	if (i < n - s + 1)//归并最后两个序列
+	{
+		Merge(SR, TR, i, i + s - 1, n);
+	}
+	else//若最后只剩下单个子序列
+	{
+		for ( j = i; j <=n; j++)
+		{
+
+			TR[j] = SR[j];
+		}
 	}
 }
 
