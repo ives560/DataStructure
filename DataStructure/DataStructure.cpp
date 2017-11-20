@@ -132,11 +132,23 @@ void QuickSortText()
 
 }
 
+#include "HuffmanTree.h"
+
+void HuffmanCodingText()
+{
+	
+	HuffmanCode code;
+	Huffman hfm;
+	int wight[5] = {5,4,3,2,1};
+	HuffmanTree tree = hfm.create_HuffmanTree(wight, 5);
+	hfm.HuffmanCoding(tree, code, 5);
+}
+
 int main()
 {
 
-	InsertSortText();
-
+	//InsertSortText();
+	HuffmanCodingText();
     return 0;
 }
 

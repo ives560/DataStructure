@@ -17,10 +17,12 @@ public:
 	Huffman();
 	~Huffman();
 	// 赫夫曼编码算法
-	void HuffmanCoding(HuffmanTree& HT, HuffmanCode& HC, int* w, int n);
+	void HuffmanCoding(HuffmanTree HT, HuffmanCode& HC, int n);
 	// 从HT数组的前k个元素中选出weight最小且parent为-1的两个，分别将其序号保存在min1和min2中
-	void Select(HuffmanTree HT, int k, int& min1, int& min2);
+	void select_minium(HuffmanTree HT, int k, int& min1, int& min2);
 	// 从HT数组的前k个元素中选出weight最小且parent为-1的元素，并将该元素的序号返回
 	int min(HuffmanTree HT, int k);
+	// 根据给定的n个权值构造一棵赫夫曼树,wet中存放n个权值
+	HuffmanTree create_HuffmanTree(int* wet, int n);
 };
 
