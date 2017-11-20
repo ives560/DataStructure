@@ -25,7 +25,7 @@ void disk_write(BTNode* node)
 	printf("\n");
 }
 
-// 模拟从磁盘读取节点  
+// 模拟从磁盘读取节点
 void disk_read(BTNode** node)
 {
 	//打印出结点中的全部元素，方便调试查看keynum之后的元素是否为0(即是否存在垃圾数据)；而不是keynum个元素。  
@@ -36,7 +36,7 @@ void disk_read(BTNode** node)
 	printf("\n");
 }
 
-// 按层次打印 B 树  
+// 按层次打印 B 树
 void ZoBTree::BTree_print(const BTree tree, int layer)
 {
 	int i;
@@ -65,7 +65,7 @@ void ZoBTree::BTree_print(const BTree tree, int layer)
 	}
 }
 
-// 结点node内对关键字进行二分查找。  
+// 结点node内对关键字进行二分查找。
 int binarySearch(BTNode* node, int low, int high, KeyType Fkey)
 {
 	int mid;

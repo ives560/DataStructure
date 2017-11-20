@@ -133,7 +133,7 @@ void QuickSortText()
 }
 
 #include "HuffmanTree.h"
-
+//ªÙ∑Ú¬¸±‡¬Î≤‚ ‘
 void HuffmanCodingText()
 {
 	
@@ -144,11 +144,34 @@ void HuffmanCodingText()
 	hfm.HuffmanCoding(tree, code, 5);
 }
 
+//œ£∂˚≈≈–Ú≤‚ ‘
+void ShellSortText()
+{
+	SqList<int> sqlist;
+	sqlist.length = 9;
+
+	sqlist.data[1] = 9;
+	sqlist.data[2] = 1;
+	sqlist.data[3] = 5;
+	sqlist.data[4] = 8;
+	sqlist.data[5] = 3;
+	sqlist.data[6] = 7;
+	sqlist.data[7] = 4;
+	sqlist.data[8] = 6;
+	sqlist.data[9] = 2;
+
+	Sort<int> sort(&sqlist);
+
+	sort.ShellSort();
+}
+
+
+
 int main()
 {
 
 	//InsertSortText();
-	HuffmanCodingText();
+	ShellSortText();
     return 0;
 }
 

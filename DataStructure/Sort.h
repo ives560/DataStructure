@@ -170,6 +170,8 @@ void Sort<T>::InsertSort()
 
 
 // 对顺序表L作希尔排序
+//时间复杂度为O(n(3/2))
+//不是稳定的排序算法
 template <typename T>
 void Sort<T>::ShellSort()
 {
@@ -177,16 +179,18 @@ void Sort<T>::ShellSort()
 	int increment = L->length;
 	do
 	{
-		increment = increment / 3 + 1;//增量序列
+		increment = increment / 3 + 1;//增量序列,increment的计算是关键
 		for (i = increment + 1; i <= L->length; i++)
 		{
-			if (L->data[i]<L->data[i - increment])
+			if (L->data[i]<L->data[i - increment])//后数小于前数L->data[i]
 			{//
-				L->data[0] = L->data[i];
-				for (j = i - increment; j>0 && L->data[0]<L->data[j]; j -= increment)
+				L->data[0] = L->data[i];//将小数L->data[i]暂存入L->data[0]
+
+				for (j = i - increment; j>0 && L->data[0]<L->data[j]; j -= increment)//交换位置，将大数放后面
 					L->data[j + increment] = L->data[j];//记录后移，查找插入位置
 
-				L->data[j + increment] = L->data[0];//插入
+				L->data[j + increment] = L->data[0];//插入，将暂存的小数赋值到大数的位置
+
 			}
 		}
 	} while (increment > 1);
