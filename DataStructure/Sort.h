@@ -196,19 +196,20 @@ void Sort<T>::ShellSort()
 	} while (increment > 1);
 }
 
-//
+//对顺序表L进行堆排序
+//调整L->data[s]的关键字,使L->data[s..m]成为一个大顶堆
 template <typename T>
 void Sort<T>::HeapAdjust(int s, int m)
 {
 	int temp, j;
 	temp = L->data[s];
-	for (j = 2 * s; j <= m; j *= 2)
+	for (j = 2 * s; j <= m; j *= 2)//沿关键字较大的孩子结点向下筛选,结点序号是s，左孩子是2s，右孩子是2s+1
 	{
 		if (j < m && L->data[j] < L->data[j + 1])
-			++j;
+			++j;//j为关键字中较大的记录的下标
 
 		if (temp >= L->data[j])
-			break;
+			break;//rc应插入在位置s上
 
 		L->data[s] = L->data[j];
 		s = j;
@@ -218,17 +219,19 @@ void Sort<T>::HeapAdjust(int s, int m)
 
 
 // 对顺序表L进行堆排序
+//时间复杂度为O(nlogn)
+//是一种不稳定的排序方法
 template <typename T>
 void Sort<T>::HeapSort()
 {
 	int i;
-	for (i = L->length / 2; i > 0; i--)
-		HeapAdjust(L, i, L->length);
+	for (i = L->length / 2; i > 0; i--)//把L中的r构建成一个大顶堆,0~L->length / 2都是有孩子的结点
+		HeapAdjust(i, L->length);
 
 	for (i = L->length; i > 1; i--)
 	{
-		swap(L, 1, i);
-		HeapAdjust(L, 1, i - 1);
+		swap(1, i);//将堆顶记录和当前未经排序子序列的最后一个记录交换
+		HeapAdjust(1, i - 1);//将L->data[1..i-1]重新调整为大顶堆
 	}
 }
 
