@@ -29,6 +29,7 @@ typedef struct EdgeNode//边表结点
 
 typedef struct VertexNode//顶点表结点
 {
+	int in;				/* 顶点入度 */
 	VertexType data;	//存储顶点数据信息
 	EdgeNode *firstedge;//边表头指针
 }VertexNode,AdjList[MAXVEX];
@@ -37,7 +38,7 @@ typedef struct
 {
 	AdjList adjList;
 	int numVertexes, numEdges;//图中当前顶点数和边数
-}GraphAdjList;
+}graphAdjList, *GraphAdjList;
 
 
 typedef int Boolean;
@@ -55,7 +56,7 @@ public:
 	// 建立无相图的邻接矩阵
 	void CreateMGraph(MGraph* G);
 	// 建立图的邻接表结构
-	void CreateALGraph(GraphAdjList* G);
+	void CreateALGraph(GraphAdjList G);
 
 	//邻接矩阵深度优先递归算法
 	void DFS(MGraph G, int i);
@@ -77,6 +78,9 @@ public:
 	int Find(int* parent, int f);
 	// 有向网G的v顶点到其余顶点v最短路径P[v]及带权长度D[v]
 	void ShortestPath_Dijkstra(MGraph G, int v0, Pathmatirx* P, ShortPathTable* D);
+
+	// 拓扑排序，若GL无回路，则输出拓扑排序序列并返回1，若有回路返回0。
+	Status TopologicalSort(GraphAdjList GL);
 };
 
 ZO_END_NAMESPACE
