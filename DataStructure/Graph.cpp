@@ -43,7 +43,7 @@ void Graph::CreateMGraph(MGraph* G)
 
 
 // 建立图的邻接表结构
-void Graph::CreateALGraph(GraphAdjList* G)
+void Graph::CreateALGraph(GraphAdjList G)
 {
 	int i, j, k;
 	EdgeNode *e;
@@ -109,8 +109,8 @@ void Graph::DFS(GraphAdjList GL, int i)
 {
 	EdgeNode *p;
 	visited[i] = TRUE;
-	printf("%c", GL.adjList[i].data);
-	p = GL.adjList[i].firstedge;
+	printf("%c", GL->adjList[i].data);
+	p = GL->adjList[i].firstedge;
 	while (p)
 	{
 		if (!visited[p->adjvex])
@@ -123,9 +123,9 @@ void Graph::DFS(GraphAdjList GL, int i)
 void Graph::DFSTraverse(GraphAdjList GL)
 {
 	int i;
-	for (i = 0; i < GL.numVertexes; i++)
+	for (i = 0; i < GL->numVertexes; i++)
 		visited[i] = FALSE;
-	for (i = 0; i < GL.numVertexes; i++)
+	for (i = 0; i < GL->numVertexes; i++)
 	{
 		if (!visited[i])
 			DFS(GL, i);
@@ -312,6 +312,40 @@ void Graph::ShortestPath_Dijkstra(MGraph G, int v0, Pathmatirx* P, ShortPathTabl
 			}
 		}
 	}
+}
+
+// 拓扑排序
+Status Graph::TopologicalSort(GraphAdjList GL)
+{
+	EdgeNode *e;
+	int i, k, gettop;
+	int top = 0;
+	int count = 0;
+	int *stack;//建栈存储入度为0的顶点
+	stack = (int *)malloc(GL->numVertexes*sizeof(int));
+	for (i = 0; i < GL->numVertexes; i++)
+	{
+		if (GL->adjList[i].in == 0)
+			stack[++top] = i;//将入度为0的顶点入栈
+	}
+
+	while (top!=0)
+	{
+		gettop = stack[top--];//出栈
+		printf("%d ->", GL->adjList[gettop].data);
+		count++;//统计输出顶点数
+		for (e = GL->adjList[gettop].firstedge; e; e = e->next)//对此顶点弧表遍历
+		{
+			k = e->adjvex;
+			if (!(--GL->adjList[k].in))//将k号顶点邻接点的入度减1
+				stack[++top] = k;//若为0则入栈，以便与下次循环输出
+		}
+	}
+
+	if (count < GL->numVertexes)//如果count小于顶点数，说明存在环
+		return ERROR;
+	else
+		return OK;
 }
 
 ZO_END_NAMESPACE
