@@ -240,7 +240,7 @@ void Graph::MiniSpanTree_Prim(MGraph G)
 	//
 	for (i = 1; i < G.numVertexes; i++)
 	{
-		min = INFINITY;
+		min = INFINITY;//初始化最小权值为∞，通常设置为不可能的大数字如32767、65535等
 		j = 1; 
 		k = 0;
 
