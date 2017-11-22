@@ -55,9 +55,9 @@ private:
 public:
 	Graph();
 	~Graph();
-	// 建立无相图的邻接矩阵
+	// 建立无向图的邻接矩阵
 	void CreateMGraph(MGraph* G);
-	// 建立图的邻接表结构
+	// 建立无向图的邻接表结构
 	void CreateALGraph(GraphAdjList* G);
 
 	//邻接矩阵深度优先递归算法

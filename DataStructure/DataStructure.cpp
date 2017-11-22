@@ -213,8 +213,11 @@ void GraphText()
 {
 	GraphAdjList G;
 	Graph graph;
+	EdgeNode *e;
+
 	graph.CreateALGraph(&G);
-	graph.DFSTraverse(&G);
+
+	graph.BFSTraverse(&G);
 }
 
 

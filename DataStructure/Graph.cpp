@@ -12,14 +12,14 @@ Graph::~Graph()
 {
 }
 
-// 建立无相图的邻接矩阵
+// 建立无向图的邻接矩阵
 void Graph::CreateMGraph(MGraph* G)
 {
 	int i, j, k, w;
-	printf("输入顶点数和边数：\n");
+	printf("输入顶点数和边数：");
 	scanf("%d,%d", &G->numVertexes, &G->numEdges);//输入顶点数和边数
 
-	printf("输入%d个顶点信息：\n", G->numVertexes);
+	printf("输入%d个顶点信息：", G->numVertexes);
 	for (i = 0; i < G->numVertexes; i++)
 		scanf(&G->vexs[i]);
 
@@ -33,7 +33,7 @@ void Graph::CreateMGraph(MGraph* G)
 	//读入G->numEdges条边，建立邻接矩阵
 	for (k = 0; k < G->numEdges; k++)
 	{
-		printf("输入边(vi,vj)上的下标i,下标j和权w：\n");
+		printf("输入边(vi,vj)上的下标i,下标j和权w：");
 		scanf("%d,%d,%d", &i, &j, &w);
 		G->arc[i][j] = w;
 		G->arc[j][i] = G->arc[i][j];//无向图，矩阵对称
@@ -42,12 +42,12 @@ void Graph::CreateMGraph(MGraph* G)
 }
 
 
-// 建立图的邻接表结构
+// 建立无向图的邻接表结构
 void Graph::CreateALGraph(GraphAdjList* G)
 {
 	int i, j, k;
 	EdgeNode *e;
-	printf("输入顶点数和边数：\n");
+	printf("输入顶点数和边数：");
 	scanf("%d,%d",&G->numVertexes,&G->numEdges);
 
 	printf("输入%d个顶点信息：\n", G->numVertexes);
@@ -59,16 +59,16 @@ void Graph::CreateALGraph(GraphAdjList* G)
 
 	for (k = 0; k < G->numEdges; k++)//建立边表
 	{
-		printf("输入边(vi,vj)上的顶点序号：\n");
+		printf("输入边(vi,vj)上的顶点序号：");
 		scanf("%d,%d",&i,&j);
 
-		//向顶点j插入边节点
+		//向顶点i插入边节点j
 		e = (EdgeNode*)malloc(sizeof(EdgeNode));
 		e->adjvex = j;				//邻接序号为j
 		e->next = G->adjList[i].firstedge;
 		G->adjList[i].firstedge = e;
 
-		//向顶点i插入边节点
+		//向顶点j插入边节点i
 		e = (EdgeNode*)malloc(sizeof(EdgeNode));
 		e->adjvex = i;				//邻接序号为i
 		e->next = G->adjList[j].firstedge;
@@ -82,7 +82,7 @@ void Graph::DFS(MGraph G, int i)
 {
 	int j;
 	visited[i] = TRUE;
-	printf("%c", G.vexs[i]);
+	printf("%d ", G.vexs[i]);
 	for (j = 0; j < G.numVertexes; j++)
 	{
 		if (G.arc[i][j] == 1 && !visited[j])
@@ -97,6 +97,8 @@ void Graph::DFSTraverse(MGraph G)
 	for (i = 0; i < G.numVertexes; i++)
 		visited[i] = FALSE;
 
+	printf("邻接矩阵深度遍历:\n");
+
 	for (i = 0; i < G.numVertexes; i++)
 	{
 		if (!visited[i])
@@ -109,12 +111,15 @@ void Graph::DFS(GraphAdjList* GL, int i)
 {
 	EdgeNode *p;
 	visited[i] = TRUE;
-	printf("%c", GL->adjList[i].data);
+	printf("%d ", GL->adjList[i].data);//打印顶点,也可以其它操作
 	p = GL->adjList[i].firstedge;
 	while (p)
 	{
-		if (!visited[p->adjvex])
+		if (!visited[p->adjvex])//对为访问的邻接顶点递归调用
+		{
 			DFS(GL, p->adjvex);
+		}
+			
 		p = p->next;
 	}
 }
@@ -123,12 +128,14 @@ void Graph::DFS(GraphAdjList* GL, int i)
 void Graph::DFSTraverse(GraphAdjList* GL)
 {
 	int i;
-	for (i = 0; i < GL->numVertexes; i++)
+	for (i = 0; i < GL->numVertexes; i++)//初始所有顶点状态都是未访问过状态
 		visited[i] = FALSE;
+
+	printf("邻接表深度遍历:\n");
 
 	for (i = 0; i < GL->numVertexes; i++)
 	{
-		if (!visited[i])
+		if (!visited[i])//对未访问过的顶点调用DFS,若是连通图,只会执行一次
 			DFS(GL, i);
 	}
 }
@@ -138,17 +145,19 @@ void Graph::BFSTraverse(MGraph G)
 {
 	int i, j;
 	Queue<int> queue;
+	queue.InitQueue();
 
 	for (i = 0; i < G.numVertexes; i++)
 		visited[i] = FALSE;
 
+	printf("邻接矩阵广度遍历:\n");
 
 	for (i = 0; i < G.numVertexes; i++)
 	{
 		if (!visited[i])
 		{
 			visited[i] = TRUE;
-			printf("%c", G.vexs[i]);
+			printf("%d ", G.vexs[i]);
 			queue.enQueue(i);
 			
 			while (!queue.QueueEmpty())
@@ -159,7 +168,7 @@ void Graph::BFSTraverse(MGraph G)
 					if (G.arc[i][j] == 1 && !visited[j])
 					{
 						visited[j] = TRUE;
-						printf("%c", G.vexs[j]);
+						printf("%d ", G.vexs[j]);
 						queue.enQueue(j);
 					}
 				}
@@ -174,15 +183,19 @@ void Graph::BFSTraverse(GraphAdjList* GL)
 	int i;
 	EdgeNode *p;
 	Queue<int> queue;
+	queue.InitQueue();
+
 	for (i = 0; i < GL->numVertexes; i++)
 		visited[i] = FALSE;
+
+	printf("邻接表广度遍历:\n");
 
 	for (i = 0; i < GL->numVertexes; i++)
 	{
 		if (!visited[i])
 		{
 			visited[i] = TRUE;
-			printf("%c ", GL->adjList[i].data);/* 打印顶点,也可以其它操作 */
+			printf("%d ", GL->adjList[i].data);/* 打印顶点,也可以其它操作 */
 			queue.enQueue(i);
 			while (!queue.QueueEmpty())
 			{
@@ -193,7 +206,7 @@ void Graph::BFSTraverse(GraphAdjList* GL)
 					if (!visited[p->adjvex])	/* 若此顶点未被访问 */
 					{
 						visited[p->adjvex] = TRUE;
-						printf("%c ", GL->adjList[p->adjvex].data);
+						printf("%d ", GL->adjList[p->adjvex].data);
 						queue.enQueue(p->adjvex);	/* 将此顶点入队列 */
 					}
 					p = p->next;	/* 指针指向下一个邻接点 */
