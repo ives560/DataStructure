@@ -43,7 +43,7 @@ void Graph::CreateMGraph(MGraph* G)
 
 
 // 建立图的邻接表结构
-void Graph::CreateALGraph(GraphAdjList G)
+void Graph::CreateALGraph(GraphAdjList* G)
 {
 	int i, j, k;
 	EdgeNode *e;
@@ -53,7 +53,7 @@ void Graph::CreateALGraph(GraphAdjList G)
 	printf("输入%d个顶点信息：\n", G->numVertexes);
 	for (i = 0; i < G->numVertexes; i++)//读入顶点信息，建立顶点表
 	{
-		scanf(&G->adjList[i].data);
+		scanf("%d",&G->adjList[i].data);
 		G->adjList[i].firstedge = NULL;
 	}
 
@@ -105,7 +105,7 @@ void Graph::DFSTraverse(MGraph G)
 }
 
 //邻接表深度优先递归算法
-void Graph::DFS(GraphAdjList GL, int i)
+void Graph::DFS(GraphAdjList* GL, int i)
 {
 	EdgeNode *p;
 	visited[i] = TRUE;
@@ -120,11 +120,12 @@ void Graph::DFS(GraphAdjList GL, int i)
 }
 
 //邻接表深度遍历
-void Graph::DFSTraverse(GraphAdjList GL)
+void Graph::DFSTraverse(GraphAdjList* GL)
 {
 	int i;
 	for (i = 0; i < GL->numVertexes; i++)
 		visited[i] = FALSE;
+
 	for (i = 0; i < GL->numVertexes; i++)
 	{
 		if (!visited[i])
@@ -166,6 +167,43 @@ void Graph::BFSTraverse(MGraph G)
 		}
 	}
 }
+
+/* 邻接表的广度遍历算法 */
+void Graph::BFSTraverse(GraphAdjList* GL)
+{
+	int i;
+	EdgeNode *p;
+	Queue<int> queue;
+	for (i = 0; i < GL->numVertexes; i++)
+		visited[i] = FALSE;
+
+	for (i = 0; i < GL->numVertexes; i++)
+	{
+		if (!visited[i])
+		{
+			visited[i] = TRUE;
+			printf("%c ", GL->adjList[i].data);/* 打印顶点,也可以其它操作 */
+			queue.enQueue(i);
+			while (!queue.QueueEmpty())
+			{
+				queue.deQueue(i);
+				p = GL->adjList[i].firstedge;	/* 找到当前顶点的边表链表头指针 */
+				while (p)
+				{
+					if (!visited[p->adjvex])	/* 若此顶点未被访问 */
+					{
+						visited[p->adjvex] = TRUE;
+						printf("%c ", GL->adjList[p->adjvex].data);
+						queue.enQueue(p->adjvex);	/* 将此顶点入队列 */
+					}
+					p = p->next;	/* 指针指向下一个邻接点 */
+				}
+			}
+		}
+	}
+}
+
+
 
 //Prim算法生成连通网最小生成树
 void Graph::MiniSpanTree_Prim(MGraph G)
@@ -316,7 +354,7 @@ void Graph::ShortestPath_Dijkstra(MGraph G, int v0, Pathmatirx* P, ShortPathTabl
 }
 
 // 拓扑排序，若GL无回路，则输出拓扑排序序列并返回1，若有回路返回0。
-Status Graph::TopologicalSort(GraphAdjList GL)
+Status Graph::TopologicalSort(GraphAdjList* GL)
 {
 	EdgeNode *e;
 	int i, k, gettop;

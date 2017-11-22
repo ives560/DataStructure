@@ -207,13 +207,23 @@ void MergeSortText()
 	sort.MergeSort2();
 }
 
+//Õº≤‚ ‘
+#include "Graph.h"
+void GraphText()
+{
+	GraphAdjList G;
+	Graph graph;
+	graph.CreateALGraph(&G);
+	graph.DFSTraverse(&G);
+}
+
 
 
 int main()
 {
 
 	//InsertSortText();
-	MergeSortText();
+	GraphText();
     return 0;
 }
 
